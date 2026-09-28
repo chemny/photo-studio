@@ -6,6 +6,12 @@ Photo Studio is an Agent Skill for photography studios and portrait businesses. 
 
 The core workflows cover ID photos, wedding portraits, family and parent-child portraits, personal-branding portraits, and artistic portraits. Meme, pet-portrait, and mixed-collection routes are lighter workflows.
 
+## Preview
+
+![Photo Studio's nine photo product categories in one visual: wedding, artistic, personal branding, family, ID, pet, parent-child, meme, and mixed collection](./assets/previews/photo-studio-overview.png)
+
+From left to right, top to bottom: wedding portrait, artistic portrait, personal-branding portrait; family portrait, ID photo, pet portrait; parent-child portrait, meme, mixed collection. This overview uses AI-generated fictional subjects to illustrate supported categories. It is not a client case study or a sample of each category's final output format.
+
 ## Who Is This For?
 
 - Photography studios that need a repeatable intake, preview, quality-check, and delivery workflow.
@@ -92,7 +98,7 @@ photo-studio/
 ├── README.zh.md
 ├── LICENSE
 ├── agents/
-├── assets/                 # size, composition, and portrait presets
+├── assets/                 # presets and category overview image
 ├── references/             # product rules and quality checks
 ├── scripts/                # optional formatting and delivery helpers
 └── requirements.txt
