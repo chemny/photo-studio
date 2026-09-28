@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "default_profile": "two_inch",
+  "dpi": 300,
+  "matching_precedence": [
+    "explicit_dimensions",
+    "explicit_purpose",
+    "named_size",
+    "default_profile"
+  ],
+  "profiles": [
+    {
+      "id": "small_one_inch",
+      "canonical_name": "小一寸",
+      "aliases": ["小1寸", "小一吋"],
+      "width_mm": 22,
+      "height_mm": 32,
+      "width_px": 260,
+      "height_px": 378
+    },
+    {
+      "id": "one_inch",
+      "canonical_name": "普通一寸",
+      "aliases": ["一寸", "1寸", "标准一寸"],
+      "width_mm": 25,
+      "height_mm": 35,
+      "width_px": 295,
+      "height_px": 413
+    },
+    {
+      "id": "large_one_inch",
+      "canonical_name": "大一寸",
+      "aliases": ["大1寸", "大一吋"],
+      "width_mm": 33,
+      "height_mm": 48,
+      "width_px": 390,
+      "height_px": 567
+    },
+    {
+      "id": "small_two_inch",
+      "canonical_name": "小二寸",
+      "aliases": ["小2寸", "小两寸", "小二吋"],
+      "width_mm": 35,
+      "height_mm": 45,
+      "width_px": 413,
+      "height_px": 531
+    },
+    {
+      "id": "two_inch",
+      "canonical_name": "普通二寸",
+      "aliases": ["二寸", "两寸", "2寸", "标准二寸"],
+      "width_mm": 35,
+      "height_mm": 49,
+      "width_px": 413,
+      "height_px": 579
+    },
+    {
+      "id": "large_two_inch",
+      "canonical_name": "大二寸",
+      "aliases": ["大2寸", "大两寸", "大二吋"],
+      "width_mm": 35,
+      "height_mm": 53,
+      "width_px": 413,
+      "height_px": 626
+    },
+    {
+      "id": "cn_entry_exit_33x48",
+      "canonical_name": "出入境证件纸质照33×48mm",
+      "aliases": ["港澳通行证纸质照", "出入境证件33×48mm", "出入境小二寸纸质照"],
+      "width_mm": 33,
+      "height_mm": 48,
+      "width_px": 390,
+      "height_px": 567,
+      "purpose_override": true
+    }
+  ]
+}

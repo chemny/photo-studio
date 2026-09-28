@@ -1,0 +1,20 @@
+{
+  "v1-person": {
+    "cover": 1,
+    "id_photo": 4,
+    "personal_branding": 4,
+    "artistic_portrait": 4,
+    "wedding_or_formal": 4,
+    "memes": 8,
+    "contact_sheet": 1
+  },
+  "v1-pet": {
+    "cover": 1,
+    "pet_id_photo": 4,
+    "anthropomorphic_branding": 4,
+    "artistic_pet_portrait": 4,
+    "formal_costume": 4,
+    "memes": 8,
+    "contact_sheet": 1
+  }
+}

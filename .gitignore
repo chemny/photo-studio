@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Build / dist
+node_modules/
+build/
+dist/
+*.whl
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Job outputs
+客户名-日期-套系/
+*/*-manifest.json
+07-高清成片/
+08-选片合集/
+
+# Logs / temp
+*.log
+*.tmp
+tmp/
+publish-check-report.json
+se-quality-report.json
+
+# Local secrets / env
+.env
+.env.local
+secrets.*

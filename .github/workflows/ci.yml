@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  PYTHONIOENCODING: utf-8
+  PYTHONUTF8: "1"
+
+jobs:
+  test:
+    name: test (${{ matrix.os }}, py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate skill structure (self_check.py)
+        shell: bash
+        run: python scripts/self_check.py
+
+      - name: Smoke test --help on every script
+        shell: bash
+        run: |
+          set -e
+          for script in scripts/*.py; do
+            echo "=== $script --help ==="
+            python "$script" --help
+          done
+
+      - name: End-to-end smoke test on a fresh job
+        shell: bash
+        run: |
+          set -e
+          JOB_ROOT="$(mktemp -d)"
+          PACKAGE="verify"
+          JOB_DIR="$(python scripts/create_job.py \
+              --root "$JOB_ROOT" \
+              --client "CI Client" \
+              --package "$PACKAGE" \
+              --subject person \
+              --final-quantity 3 \
+              --production-mode direct)"
+          echo "Created job: $JOB_DIR"
+          test -f "$JOB_DIR/job-manifest.json"
+          test -d "$JOB_DIR/00-封面"
+          test -d "$JOB_DIR/07-高清成片"
+
+          python scripts/record_confirmation.py "$JOB_DIR/job-manifest.json" \
+              --stage intent --decision confirmed --note "CI fixture"
+
+          python scripts/validate_delivery.py "$JOB_DIR" --stage structure
+
+          echo "OK: end-to-end smoke test passed"

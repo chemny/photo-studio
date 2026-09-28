@@ -1,0 +1,268 @@
+{
+  "schema_version": 7,
+  "default_preset": "urban_light_wedding",
+  "question_policy": {
+    "max_consolidated_rounds": 1,
+    "ask_when": [
+      "two_subject_attire_mapping_is_ambiguous",
+      "three_or_more_subjects_require_selection",
+      "specified_real_partner_reference_is_missing"
+    ],
+    "do_not_ask_when_default_available": [
+      "style",
+      "scene",
+      "framing",
+      "aspect_ratio",
+      "retouching",
+      "quantity"
+    ],
+    "recommended_attire_mapping": {
+      "subject_a": "light_wedding_formalwear",
+      "subject_b": "dark_or_scene_appropriate_formalwear"
+    }
+  },
+  "subject_routing": {
+    "one_subject": "solo_wedding_portrait_without_added_partner",
+    "two_subjects": "couple_wedding_portrait",
+    "three_or_more_subjects": "ask_once_family_group_or_select_two",
+    "missing_real_partner_reference": "request_reference_and_do_not_fabricate"
+  },
+  "shared_defaults": {
+    "aspect_ratio": "4:5",
+    "framing": "varied_editorial",
+    "expression": "youthful_relaxed_or_joyful",
+    "gaze": "camera_forward_with_limited_story_exceptions",
+    "hand_emphasis": "low",
+    "retouching": "light_natural_skin_texture",
+    "format": "JPG",
+    "quantity": 1
+  },
+  "presets": [
+    {
+      "id": "urban_light_wedding",
+      "name": "都市轻婚礼",
+      "aliases": ["都市", "轻婚礼", "登记照", "街拍", "美术馆"],
+      "scene": "registry_museum_or_modern_city_street",
+      "background": "bright_contemporary_architecture",
+      "lighting": "fresh_daylight_or_playful_direct_flash",
+      "wardrobe": "short_or_clean_column_bridal_dress_and_relaxed_suit",
+      "pose": "walking_hand_in_hand_turning_or_laughing",
+      "framing": "moving_three_quarter_or_environmental",
+      "props": "none",
+      "mood": "joyful_spontaneous_current"
+    },
+    {
+      "id": "minimal_fashion_editorial",
+      "name": "极简时装片",
+      "aliases": ["极简", "时装", "影棚", "雕塑感", "高级婚纱"],
+      "scene": "cool_white_studio_with_metal_or_geometric_installation",
+      "background": "cool_white_light_gray_and_brushed_metal",
+      "lighting": "clean_window_light_or_refined_direct_flash",
+      "wardrobe": "sculptural_gown_or_bridal_trouser_suit_and_sharp_black_formalwear",
+      "pose": "one_seated_one_standing_leaning_or_offset",
+      "framing": "asymmetric_full_or_three_quarter",
+      "props": "none_or_single_sculptural_flower",
+      "mood": "confident_graphic_contemporary"
+    },
+    {
+      "id": "outdoor_youth_documentary",
+      "name": "户外青春纪实",
+      "aliases": ["海边", "沙滩", "草坪", "林地", "公路", "森系", "户外", "纪实"],
+      "scene": "sandy_beach_meadow_woodland_road_or_open_nature",
+      "background": "wide_bright_natural_environment",
+      "lighting": "neutral_fresh_daylight_without_orange_cast",
+      "wardrobe": "light_slip_dress_short_veil_or_no_veil_and_light_relaxed_suit",
+      "pose": "running_spinning_chasing_or_wind_movement",
+      "framing": "wide_dynamic_environmental",
+      "props": "none",
+      "mood": "energetic_candid_young"
+    },
+    {
+      "id": "new_chinese_youth",
+      "name": "新中式青年感",
+      "aliases": ["中式", "新中式", "旗袍", "红墙", "国风", "城市夜景"],
+      "scene": "contemporary_red_wall_modern_chinese_architecture_or_city_night",
+      "background": "restrained_red_ivory_black_with_negative_space",
+      "lighting": "clean_daylight_or_modern_direct_flash",
+      "wardrobe": "modern_qipao_short_red_dress_or_clean_chinese_suit",
+      "pose": "descending_steps_walking_together_or_close_playful_interaction",
+      "framing": "graphic_offset_three_quarter",
+      "props": "minimal_or_none",
+      "mood": "festive_young_restrained"
+    }
+  ],
+  "concept_grid_constraints": {
+    "panel_aspect_ratio": "3:4",
+    "grid_layout": "3_columns_x_3_rows",
+    "grid_aspect_ratio": "3:4",
+    "forbid_mixed_panel_aspect_ratios_default": true,
+    "forbid_non_uniform_scaling": true,
+    "distinct_wardrobe_silhouettes": 5,
+    "max_traditional_long_train_panels": 1,
+    "min_both_camera_gaze_panels_nine_panel": 6,
+    "min_at_least_one_camera_gaze_panels_nine_panel": 8,
+    "max_no_camera_gaze_panels_nine_panel": 1,
+    "max_pure_back_view_panels_default": 0,
+    "min_full_or_near_full_body_panels_nine_panel": 3,
+    "max_walking_hand_in_hand_panels": 1,
+    "max_repeated_action_panels": 1,
+    "max_side_by_side_upright_ratio": 0.45,
+    "required_scene_categories": ["interior", "urban", "nature"],
+    "example_scene_slots": ["garden", "interior", "conservatory", "sandy_beach", "chinese_courtyard", "modern_architecture", "city_night", "woodland_meadow", "minimal_studio"],
+    "allow_user_requested_scene_substitution": true,
+    "require_substitute_scene_distinct_from_other_panels": true,
+    "required_pose_families": [
+      "seated_standing_height_contrast",
+      "spin_dance_or_dynamic_motion",
+      "formal_full_body_wedding_portrait",
+      "foreground_background_depth",
+      "close_intimate_action"
+    ],
+    "require_varied_actions": true,
+    "require_varied_gaze": true,
+    "require_varied_body_orientation": true,
+    "require_varied_contact_point": true,
+    "require_varied_subject_distance": true,
+    "require_varied_framing_or_camera_angle": true,
+    "require_scene_specific_lighting": true,
+    "default_stage": "single_concept_grid"
+  },
+  "wedding_recognition_constraints": {
+    "require_unmistakable_bridal_attire": true,
+    "require_groom_specific_formalwear": true,
+    "forbid_plain_business_suit_with_ordinary_necktie_as_default": true,
+    "forbid_waiter_or_service_staff_styling": true,
+    "forbid_assistant_like_groom_placement": true,
+    "forbid_bouquet_obscuring_gown_structure": true,
+    "new_chinese_requires_restrained_modern_tailoring": true
+  },
+  "example_pose_matrix_nine_panel": [
+    {
+      "slot": "garden",
+      "action": "formal_full_body_groom_adjusting_veil",
+      "relationship": "offset_formal",
+      "gaze": "both_to_camera",
+      "depth": "foreground_background",
+      "contact": "veil_not_hand"
+    },
+    {
+      "slot": "interior",
+      "action": "bride_seated_groom_standing_formal_portrait",
+      "relationship": "height_contrast",
+      "gaze": "both_to_camera",
+      "depth": "same_plane",
+      "contact": "cuff_or_ring"
+    },
+    {
+      "slot": "conservatory",
+      "action": "bride_spinning_foreground_groom_watching_background",
+      "relationship": "dynamic_depth",
+      "gaze": "bride_to_camera_groom_to_bride",
+      "depth": "foreground_background",
+      "contact": "none"
+    },
+    {
+      "slot": "sandy_beach",
+      "action": "slow_dance_or_embrace_spin",
+      "relationship": "rotational_motion",
+      "gaze": "mutual_gaze",
+      "depth": "same_plane",
+      "contact": "waist_or_shoulder"
+    },
+    {
+      "slot": "chinese_courtyard",
+      "action": "modern_chinese_asymmetric_formal_portrait",
+      "relationship": "asymmetric_formal",
+      "gaze": "both_to_camera",
+      "depth": "layered",
+      "contact": "arm_or_waist"
+    },
+    {
+      "slot": "modern_architecture",
+      "action": "close_newlywed_embrace_with_architecture",
+      "relationship": "close_intimate",
+      "gaze": "both_to_camera",
+      "depth": "environmental_close_portrait",
+      "contact": "waist_and_lapel"
+    },
+    {
+      "slot": "city_night",
+      "action": "offset_city_night_turning_portrait",
+      "relationship": "staggered_depth",
+      "gaze": "both_to_camera",
+      "depth": "foreground_background",
+      "contact": "hand_on_upper_arm"
+    },
+    {
+      "slot": "woodland_meadow",
+      "action": "playful_chase_then_pause_near_full_body",
+      "relationship": "playful_separation",
+      "gaze": "both_to_camera",
+      "depth": "layered_nature",
+      "contact": "none"
+    },
+    {
+      "slot": "minimal_studio",
+      "action": "architectural_lean_with_partner_approach",
+      "relationship": "sculptural_offset",
+      "gaze": "both_to_camera",
+      "depth": "layered_studio",
+      "contact": "hand_at_shoulder"
+    }
+  ],
+  "aesthetic_avoid": [
+    "same_gown_silhouette_across_panels",
+    "same_long_train_across_panels",
+    "same_pose_across_panels",
+    "same_standard_smile_across_panels",
+    "repeated_walking_hand_in_hand",
+    "repeated_mutual_gaze",
+    "all_panels_same_height_relationship",
+    "all_panels_same_subject_distance",
+    "mostly_looking_away_from_camera",
+    "default_pure_back_view",
+    "ordinary_business_suit_with_necktie",
+    "waiter_or_service_staff_styling",
+    "assistant_like_groom_placement",
+    "bouquet_obscuring_gown_structure",
+    "dense_red_gold_decoration",
+    "large_bouquet_in_every_frame",
+    "lace_sweetheart_neckline_as_default",
+    "heavy_ball_gown_as_default",
+    "shiny_suit",
+    "boutonniere_and_pocket_square_stack",
+    "rigid_repeated_side_by_side_pose",
+    "warm_brown_banquet_hall_cast",
+    "beauty_filter_skin",
+    "costume_like_chinese_styling",
+    "background_only_scene_change"
+  ],
+  "multi_scene_workflow": [
+    "generate_single_concept_grid",
+    "select_direction",
+    "ask_if_generate_single_final",
+    "generate_selected_direction_final_if_requested"
+  ],
+  "identity_invariants": [
+    "face_shape",
+    "facial_proportions",
+    "age_presentation",
+    "skin_tone",
+    "hairline",
+    "distinctive_features",
+    "eyewear_unless_user_requests_removal",
+    "basic_body_shape",
+    "relative_height_difference"
+  ],
+  "quality_failures": [
+    "subject_identity_swap",
+    "attire_mapping_swap",
+    "extra_or_duplicate_subject",
+    "merged_or_extra_limb",
+    "obvious_hand_anatomy_error",
+    "broken_wedding_attire_or_accessory",
+    "inconsistent_subject_scale_lighting_or_perspective",
+    "concept_grid_insufficient_variation",
+    "default_modern_aesthetic_regression"
+  ]
+}

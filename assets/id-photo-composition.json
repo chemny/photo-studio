@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "profile_id": "generic_cn_id_photo_v1",
+  "coordinate_system": {
+    "unit": "normalized_ratio",
+    "origin": "top_left",
+    "x_axis": "right",
+    "y_axis": "down",
+    "range": [0.0, 1.0]
+  },
+  "landmarks": {
+    "head_top": "highest point of the main hair mass; ignore sparse flyaway hairs",
+    "chin": "lowest point of the chin contour; exclude neck and collar",
+    "head_center_x": "midpoint of normal left and right head contour; exclude glasses temples and flyaway hairs",
+    "shoulder_start": "visible neck-to-shoulder transition on each side"
+  },
+  "numeric_rules": {
+    "head_top_y": {"preferred": 0.08, "min": 0.06, "max": 0.10, "severity": "required"},
+    "chin_y": {"preferred": 0.68, "min": 0.65, "max": 0.72, "severity": "required"},
+    "head_height_ratio": {"preferred": 0.60, "min": 0.57, "max": 0.64, "severity": "required"},
+    "head_center_x": {"preferred": 0.50, "min": 0.47, "max": 0.53, "severity": "required"},
+    "head_side_clearance_each": {"min": 0.05, "severity": "required"},
+    "shoulder_start_y": {"preferred": 0.78, "min": 0.70, "max": 0.86, "severity": "advisory"}
+  },
+  "consistency": {
+    "equation": "head_top_y + head_height_ratio = chin_y",
+    "max_absolute_error": 0.015
+  },
+  "shoulder_and_torso_rules": {
+    "neck_complete": true,
+    "both_shoulders_visible": true,
+    "bottom_crop_region": "upper_chest",
+    "hands_or_crossed_arms_visible": false,
+    "allow_natural_side_crop_of_shoulders": true,
+    "shoulder_start_y_is_advisory_only": true
+  },
+  "adjustment_order": [
+    "accept_if_within_range",
+    "translate_crop_frame",
+    "uniformly_scale_entire_subject",
+    "extend_only_plain_background",
+    "request_new_source_photo"
+  ],
+  "prohibited_operations": [
+    "move_chin_independently",
+    "reshape_face_or_head",
+    "scale_head_independently",
+    "stretch_neck",
+    "change_shoulder_width_or_line",
+    "non_uniform_subject_scaling",
+    "generatively_complete_missing_body_or_clothing"
+  ],
+  "reject_source_when": [
+    "head_top_chin_or_neck_is_cropped",
+    "both_shoulders_cannot_be_recovered_by_cropping",
+    "pose_is_clearly_profile_or_head_is_severely_tilted",
+    "face_or_contour_is_occluded_blurred_or_severely_distorted"
+  ]
+}

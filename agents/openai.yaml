@@ -1,0 +1,4 @@
+interface:
+  display_name: "影像工坊"
+  short_description: "影楼照片制作、选片预览、质检与交付工作流"
+  default_prompt: "使用 $photo-studio 理解我上传的照片需求，补全必要信息后直接生成并质检。"
