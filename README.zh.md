@@ -49,8 +49,6 @@ https://github.com/chemny/photo-studio
 
 Agent 会根据当前客户端完成安装、依赖检查和加载验证。
 
-这是私有仓库；安装者使用的 Agent 需要具备该仓库的 GitHub 访问权限。
-
 ## 快速开始
 
 上传一张清晰人像，然后说：

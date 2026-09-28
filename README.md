@@ -51,8 +51,6 @@ https://github.com/chemny/photo-studio
 
 The Agent will choose the installation method for the current client, check dependencies, and verify that the Skill loads.
 
-This is a private repository. The installing Agent must have GitHub access to it.
-
 ## Quick Start
 
 Upload a clear portrait and say:
