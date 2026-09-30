@@ -139,6 +139,8 @@
   "example_pose_matrix_nine_panel": [
     {
       "slot": "garden",
+      "shot_role": "wedding_identity_and_attire",
+      "emotional_beat": "bright_composed_celebration",
       "action": "formal_full_body_groom_adjusting_veil",
       "relationship": "offset_formal",
       "gaze": "both_to_camera",
@@ -147,6 +149,8 @@
     },
     {
       "slot": "interior",
+      "shot_role": "relationship_and_height_layers",
+      "emotional_beat": "relaxed_closeness",
       "action": "bride_seated_groom_standing_formal_portrait",
       "relationship": "height_contrast",
       "gaze": "both_to_camera",
@@ -155,6 +159,8 @@
     },
     {
       "slot": "conservatory",
+      "shot_role": "turning_moment",
+      "emotional_beat": "spontaneous_laughter",
       "action": "bride_spinning_foreground_groom_watching_background",
       "relationship": "dynamic_depth",
       "gaze": "bride_to_camera_groom_to_bride",
@@ -163,6 +169,8 @@
     },
     {
       "slot": "sandy_beach",
+      "shot_role": "romantic_movement",
+      "emotional_beat": "absorbed_mutual_gaze",
       "action": "slow_dance_or_embrace_spin",
       "relationship": "rotational_motion",
       "gaze": "mutual_gaze",
@@ -171,6 +179,8 @@
     },
     {
       "slot": "chinese_courtyard",
+      "shot_role": "modern_chinese_wedding_expression",
+      "emotional_beat": "restrained_joy",
       "action": "modern_chinese_asymmetric_formal_portrait",
       "relationship": "asymmetric_formal",
       "gaze": "both_to_camera",
@@ -179,6 +189,8 @@
     },
     {
       "slot": "modern_architecture",
+      "shot_role": "intimate_connection",
+      "emotional_beat": "quiet_affection",
       "action": "close_newlywed_embrace_with_architecture",
       "relationship": "close_intimate",
       "gaze": "both_to_camera",
@@ -187,6 +199,8 @@
     },
     {
       "slot": "city_night",
+      "shot_role": "urban_energy",
+      "emotional_beat": "confident_evening_mood",
       "action": "offset_city_night_turning_portrait",
       "relationship": "staggered_depth",
       "gaze": "both_to_camera",
@@ -195,6 +209,8 @@
     },
     {
       "slot": "woodland_meadow",
+      "shot_role": "playful_energy",
+      "emotional_beat": "post_chase_delight",
       "action": "playful_chase_then_pause_near_full_body",
       "relationship": "playful_separation",
       "gaze": "both_to_camera",
@@ -203,6 +219,8 @@
     },
     {
       "slot": "minimal_studio",
+      "shot_role": "bridal_editorial_form",
+      "emotional_beat": "self_assured_modernity",
       "action": "architectural_lean_with_partner_approach",
       "relationship": "sculptural_offset",
       "gaze": "both_to_camera",

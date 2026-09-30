@@ -26,6 +26,8 @@ REQUIRED = (
     "references/product-catalog.md",
     "references/quality-control.md",
     "references/personal-branding.md",
+    "references/photo-editing.md",
+    "references/portrait-direction.md",
     "references/portrait-safe-area.md",
     "references/safety-and-consent.md",
     "references/selection-options.md",
@@ -224,16 +226,21 @@ def main() -> int:
     pose_matrix = wedding.get("example_pose_matrix_nine_panel", [])
     pose_slots = [item.get("slot") for item in pose_matrix]
     pose_actions = [item.get("action") for item in pose_matrix]
+    pose_roles = [item.get("shot_role") for item in pose_matrix]
+    emotional_beats = [item.get("emotional_beat") for item in pose_matrix]
     pose_gazes = [item.get("gaze") for item in pose_matrix]
     if (
         len(pose_matrix) != 9
         or any(not isinstance(item, dict) for item in pose_matrix)
         or len(pose_slots) != len(set(pose_slots))
         or len(pose_actions) != len(set(pose_actions))
+        or len(pose_roles) != len(set(pose_roles))
         or any(not slot for slot in pose_slots)
         or any(not action for action in pose_actions)
+        or any(not role for role in pose_roles)
+        or any(not beat for beat in emotional_beats)
     ):
-        print("Wedding nine-panel pose matrix must contain nine unique slots and actions", file=sys.stderr)
+        print("Wedding nine-panel pose matrix must contain distinct slots, actions, and shot roles", file=sys.stderr)
         return 1
     if set(pose_slots) != set(grid_constraints["example_scene_slots"]):
         print("Wedding example nine-panel scene slots are incomplete", file=sys.stderr)

@@ -1,6 +1,6 @@
 ---
 name: photo-studio
-description: Photo Studio workflow for photography studios and portrait businesses. Turn uploaded person, couple, family, child, or pet photos into ID photos, wedding portraits, family or parent-child portraits, personal branding portraits, artistic portraits, memes, pet portraits, or mixed collections. Use when a studio or user wants an image-generation or image-editing assistant that understands the requested photo product, fills sensible defaults, asks once for genuinely missing choices, preserves identity, generates the result, checks quality, and supports natural-language revisions.
+description: Photo Studio workflow for photography studios and portrait businesses. Turn uploaded person, couple, family, child, or pet photos into ID photos, wedding portraits, family or parent-child portraits, personal branding portraits, artistic portraits, memes, pet portraits, or mixed collections; also edit an existing portrait's background, clothing, photographic style, or natural retouching. Use when a studio or user wants an image-generation or image-editing assistant that understands the requested photo product, fills sensible defaults, asks once for genuinely missing choices, preserves identity, generates the result, checks quality, and supports natural-language revisions.
 ---
 
 # 影像工坊
@@ -15,6 +15,7 @@ description: Photo Studio workflow for photography studios and portrait business
 - 用户明确说“生成、制作、帮我做”等，即表示可以在规格足够后开始本次非破坏性图片生成；不要再追加“是否开始制作”的确认。
 - 区分选方向的预览与正式成片数量：全家福和亲子照默认先出**一张包含四个横版候选画面的 `2×2` 四宫格预览**；婚纱照、个人形象照、艺术写真及其他适合探索方向的创意肖像默认先生成一张九宫格概念图。用户确认方向后，再询问是否制作所选方向的单张正式成片，不把选中某格自动视为单张生成授权。用户明确要求跳过预览、直接出成片时按其要求执行。
 - 证件照单独分流：尺寸、底色及适用的官方要求已经明确时直接生成所需成片；缺少会影响交付的规格时集中询问一次并给推荐默认值，用户采纳后直接生成。只有用户明确想比较底色或视觉效果时才生成一张对比拼图；一寸、二寸等精确尺寸用对照表说明，不靠缩略格目测，也不把拼图当作可提交文件。
+- 用户要修改一张已有照片的背景、服装、摄影风格或自然精修时，直接进入照片编辑流程并展示编辑结果；仅在用户想比较多个方向时生成候选预览。明确要求制作某类照片产品时，仍以该产品规则为主。
 - 生成后展示实际图片，再邀请用户直接描述返修要求。不要要求用户逐项验收。
 - 生成后只在对话中展示图片并提供可点击文件链接；不要自动打开文件管理器、输出目录或“显示所在文件夹”。只有用户明确要求打开文件夹时才执行。
 - 不显示内部模式、文件编号、清单字段或技术步骤，除非用户主动询问。
@@ -26,8 +27,8 @@ description: Photo Studio workflow for photography studios and portrait business
 适用于证件照的规格分流，以及婚纱照、形象照、艺术写真等创意肖像的先看概念图流程。
 
 1. 从图片和文字识别产品类型、主体、数量、用途和已知规格。
-2. 读取 `references/selection-options.md` 中当前产品的规则，只找关键缺失项。证件照还必须读取 `references/id-photo-size-map.md` 和 `references/id-photo-composition.md`；婚纱照还必须读取 `references/wedding-photo.md`；全家福或亲子照还必须读取 `references/family-portrait.md`；个人形象照还必须读取 `references/personal-branding.md`；艺术写真还必须读取 `references/artistic-portrait.md`。创意人像都按 `references/portrait-safe-area.md` 逐人、逐格检查构图留白。
-3. 信息不足时集中询问一次，并提供“采用推荐方案”的快捷回复；信息足够时按产品分流：证件照明确则直出，全家福／亲子照先出含四个横版候选画面的四宫格，其他创意肖像按各产品规则预览。
+2. 读取 `references/selection-options.md` 中当前产品的规则，只找关键缺失项。证件照还必须读取 `references/id-photo-size-map.md` 和 `references/id-photo-composition.md`；婚纱照还必须读取 `references/wedding-photo.md`；全家福或亲子照还必须读取 `references/family-portrait.md`；个人形象照还必须读取 `references/personal-branding.md`；艺术写真还必须读取 `references/artistic-portrait.md`；现有照片编辑还必须读取 `references/photo-editing.md`。创意人像生成时读取 `references/portrait-direction.md` 设计画面，并按 `references/portrait-safe-area.md` 逐人、逐格检查构图留白。
+3. 信息不足时集中询问一次，并提供“采用推荐方案”的快捷回复；信息足够时按产品分流：证件照明确则直出，现有照片编辑直接执行，全家福／亲子照先出含四个横版候选画面的四宫格，其他创意肖像按各产品规则预览。
 4. 生成后按 `references/quality-control.md` 做内部质检；明显失败时最多自动重试一次。
 5. 展示合格结果，接受“背景更浅”“更像原图”“换成中式婚纱”等自然语言返修。用户确认候选方向后，询问是否需要单张正式成片；用户只想保留预览时停在该阶段。
 
@@ -46,13 +47,14 @@ description: Photo Studio workflow for photography studios and portrait business
 
 ## 产品路由
 
-支持证件照、婚纱照、全家福／亲子照、个人形象照、艺术写真、表情包、宠物写真和混合合集。表情包、宠物写真和混合合集使用轻量分流；分类后只读取和应用当前产品的字段：
+支持证件照、婚纱照、全家福／亲子照、个人形象照、艺术写真、现有照片编辑、表情包、宠物写真和混合合集。表情包、宠物写真和混合合集使用轻量分流；分类后只读取和应用当前产品的字段：
 
 - 证件照：用途、底色以及官方像素或文件限制；按 `references/id-photo-size-map.md` 将“小一寸、一寸、小二寸、两寸”等说法一对一映射到精确规格，再按 `references/id-photo-composition.md` 裁切和定位完整人物。用户明确给出的毫米或像素优先于名称预设；不明确时按上面的单次补充信息分流，不默认做九宫格。
-- 婚纱照：按 `references/wedding-photo.md` 识别单人、双人或多人，绑定每位主体的身份与服装。单人直接进入单人婚礼九宫格预览，不询问是否增加伴侣；双人服装对应不明时只集中询问 1 次；不得凭空生成现实伴侣。
+- 婚纱照：按 `references/wedding-photo.md` 识别单人、双人或多人，绑定每位主体的身份与服装。单人直接进入单人婚礼九宫格预览，不询问是否增加伴侣；双人服装对应不明时只集中询问 1 次；不得凭空生成现实伴侣。用户明确要求虚构成年伴侣用于概念测试时，可先建立新的独立人物参考。
 - 全家福／亲子照：按 `references/family-portrait.md` 锁定入镜成员与关系，不从外貌猜亲属身份，也不凭空添加现实家人。现有清晰合影可作为共同参考；缺少指定成员参考图或未成年人授权不明时合并询问 1 次。默认先出一张 `2×2` 四宫格，四个画格均为横版并保持完整入镜名单；场景和动作都要有明显变化，不压缩人物。
 - 个人形象照：按 `references/personal-branding.md` 先识别用途，再决定正式程度、服装、背景、构图与视线。宽泛需求走职业与生活的场景覆盖；明确要突出个人特质时围绕可用于个人品牌的气质表达，不机械混入九种生活场景。默认高保真保留身份和年龄呈现；先出一张多格概念图，用户确认后再询问是否生成单张高清成片。
 - 艺术写真：按 `references/artistic-portrait.md` 以人物特质、审美表达和情绪张力为主，与强调职业可信度的个人形象照区分；保持人物可辨认。
+- 现有照片编辑：按 `references/photo-editing.md` 区分换背景、换服装、调整摄影风格和自然精修；先锁定不变区域，再完成用户指定的编辑。首次编辑一张已有照片不强制九宫格，也不自动变成新写真产品。
 - 表情包：只有用户要求文字时才收集逐条文案；整套任务需要明确数量。
 - 宠物写真：锁定毛色、花纹、耳形、眼睛和口鼻特征；是否与主人同框只在相关时询问。
 - 混合合集：确认包含的类别和总数量，再提出合计准确的推荐分配。
@@ -77,11 +79,12 @@ description: Photo Studio workflow for photography studios and portrait business
 
 多轮返修时，始终以用户当前确认的人物参考图作为身份依据；上一版生成图只作为编辑目标或场景、动作、构图参考，不因生成次数增加就取代人物参考图。
 
-每次提示词至少明确：
+创意人像按 `references/portrait-direction.md` 先确定每张照片的拍摄瞬间，再编写生成提示词。每次生成或编辑提示词至少明确：
 
 - 当前照片产品和使用场景；
 - 必须保持不变的身份锚点；
 - 背景、服装、构图、光线、色调和目标尺寸；
+- 编辑已有照片时，明确本轮要改的内容与其余需要保持的内容；
 - 排除身份漂移、重复主体、异常肢体、变形眼镜或配饰、乱码和水印。
 
 多人任务分别锁定每位主体，禁止交换五官、服装或身份。不要根据一张单人照片凭空创造指定现实人物。
