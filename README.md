@@ -23,7 +23,7 @@ AI-generated illustration of the supported categories, not a client case or a sa
 | Selected portrait final | Turn an approved panel into a new single image, preserving the chosen scene and styling while checking the person against the original reference. |
 | ID photos | Make one file to an explicit size and background when the specification is clear; check the receiving organization's rules for official use. |
 | Existing-photo editing | Change a requested background, outfit, photographic look, or retouching detail while protecting the parts meant to stay. |
-| Quality checks and revisions | Check identity, body proportions, margins, scene variety, and image proportions; revise the requested detail. |
+| Quality checks and revisions | Check identity, body proportions, margins, scene and outfit fit, unintended people, and panel proportions; revise the requested detail. |
 | Optional studio package | Create job records, contact sheets, exact output formats, and delivery checks when a formal package is requested. |
 
 ## Installation
@@ -66,10 +66,13 @@ You should receive one preview sheet. Compare the scenes and framing, then reque
 - **Parent-child portrait:** “Use this photo of me and my child for four landscape directions with different activities. Keep our faces and ages recognizable.”
 - **ID photo:** “Make one blue-background two-inch ID photo from this image. Preserve my face and clothing.” For an official application, give the receiving channel's current pixel, file-size, and background rules.
 - **Existing photo:** “Replace this photo's background with a bright studio. Keep my face, outfit, and pose.”
+- **Outfit direction:** “Show several modern outfit directions in one image first. Keep the approved settings and poses, and let me choose before making the final preview.”
 
 ## How It Works
 
 The [Skill entry point](./SKILL.md) identifies the photo product and reads its matching rule in [`references/`](./references/). Creative previews use independently generated 3:4 portrait cells for a nine-panel sheet, or 4:3 landscape cells for a four-panel family or parent-child sheet. The [composition helper](./scripts/compose_grid.py) checks matching sizes and proportions, then joins the cells without stretching them. A selected final is generated as its own image and checked against both the original person reference and the chosen panel.
+
+For a quick outfit or style choice, the Agent can first show one exploratory direction board. Once a direction is chosen, a production preview still uses individually made, checked cells. Revisions preserve the approved person, scene, and pose except where the request calls for a change.
 
 Product guidance covers [ID sizes](./references/id-photo-size-map.md), [wedding](./references/wedding-photo.md), [family and parent-child](./references/family-portrait.md), [personal branding](./references/personal-branding.md), [artistic portraits](./references/artistic-portrait.md), [portrait direction](./references/portrait-direction.md), and [existing-photo editing](./references/photo-editing.md). Only formal package requests use the optional job and delivery scripts. The [workflow acceptance cases](./references/workflow-acceptance.md) check routing and conversation behavior.
 
