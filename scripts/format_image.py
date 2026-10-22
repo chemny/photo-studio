@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import argparse
+from io import BytesIO
+import os
 from pathlib import Path
+import tempfile
 
 from PIL import Image, ImageColor, ImageOps
 
@@ -68,10 +71,20 @@ def main() -> int:
     parser.add_argument("--fit", choices=["crop", "contain"], default="crop")
     parser.add_argument("--background", default="#FFFFFF")
     parser.add_argument("--quality", type=int, default=95)
+    parser.add_argument("--crop-box", nargs=4, type=int, metavar=("LEFT", "TOP", "RIGHT", "BOTTOM"),
+                        help="Explicit source crop after EXIF orientation, before proportional resizing")
+    parser.add_argument("--max-bytes", type=int, help="Fail if the encoded file exceeds this byte limit")
+    parser.add_argument("--min-quality", type=int, default=75, help="JPEG compression floor when --max-bytes is set")
     args = parser.parse_args()
 
     if not 1 <= args.quality <= 100:
         parser.error("--quality must be between 1 and 100")
+    if args.dpi < 1:
+        parser.error("--dpi must be positive")
+    if not 1 <= args.min_quality <= 100:
+        parser.error("--min-quality must be between 1 and 100")
+    if args.max_bytes is not None and args.max_bytes < 1:
+        parser.error("--max-bytes must be positive")
     size = target_size(args, parser)
     source = Path(args.input).resolve()
     output = Path(args.output).resolve()
@@ -80,10 +93,17 @@ def main() -> int:
     output_format = FORMATS.get(output.suffix.lower())
     if not output_format:
         parser.error("output extension must be JPG, PNG, TIFF, or WEBP")
+    if args.max_bytes and output_format == "JPEG" and args.min_quality > args.quality:
+        parser.error("--min-quality must not exceed --quality for bounded JPEG export")
 
     background = parse_color(args.background)
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened).convert("RGBA")
+    if args.crop_box:
+        left, top, right, bottom = args.crop_box
+        if not (0 <= left < right <= image.width and 0 <= top < bottom <= image.height):
+            parser.error("--crop-box must have positive area entirely within the oriented source")
+        image = image.crop((left, top, right, bottom))
     image = resize(image, size, args.fit, background)
 
     if output_format == "JPEG":
@@ -93,7 +113,6 @@ def main() -> int:
     elif output_format in {"TIFF", "WEBP"} and image.getchannel("A").getextrema() == (255, 255):
         image = image.convert("RGB")
 
-    output.parent.mkdir(parents=True, exist_ok=True)
     save_options = {"dpi": (args.dpi, args.dpi)}
     if output_format == "JPEG":
         save_options.update(quality=args.quality, optimize=True)
@@ -103,8 +122,31 @@ def main() -> int:
         save_options.update(compression="tiff_lzw")
     elif output_format == "WEBP":
         save_options.update(quality=args.quality, method=6)
-    image.save(output, format=output_format, **save_options)
-    print(f"{output}\t{image.width}x{image.height}\t{args.dpi}dpi\t{output_format}")
+    qualities = range(args.quality, args.min_quality - 1, -1) if args.max_bytes and output_format == "JPEG" else [args.quality]
+    for quality in qualities:
+        if output_format == "JPEG":
+            save_options["quality"] = quality
+        buffer = BytesIO()
+        image.save(buffer, format=output_format, **save_options)
+        encoded = buffer.getvalue()
+        if args.max_bytes is None or len(encoded) <= args.max_bytes:
+            break
+    else:
+        parser.error(f"cannot meet {args.max_bytes}-byte limit at JPEG quality >= {args.min_quality}; dimensions were not reduced")
+    if args.max_bytes is not None and len(encoded) > args.max_bytes:
+        parser.error(f"encoded {output_format} is {len(encoded)} bytes, above {args.max_bytes}; output was not written")
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=output.parent, prefix=".photo-export-", delete=False) as staged:
+            temporary = Path(staged.name)
+            staged.write(encoded)
+        os.replace(temporary, output)
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
+    print(f"{output}\t{image.width}x{image.height}\t{args.dpi}dpi\t{output_format}\t{len(encoded)} bytes")
     return 0
 
 

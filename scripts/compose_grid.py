@@ -8,8 +8,9 @@ from PIL import Image, ImageOps
 
 
 LAYOUTS = {
-    "3x3": (3, 3, 3, 4, 12, 16),
-    "2x2": (2, 2, 4, 3, 16, 12),
+    "3x3": (3, 3, 2, 3, 12, 18),
+    "2x2": (2, 2, 3, 2, 18, 12),
+    "3x2": (3, 2, 3, 2, 18, 16),
 }
 
 
@@ -17,10 +18,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--layout", choices=LAYOUTS, required=True)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--panel-aspect-ratio", choices=["2:3", "3:2"],
+                        help="Override the default panel ratio; use 3:2 for a nine-panel family layout")
     parser.add_argument("images", nargs="+", type=Path, help="Cell images in reading order")
     args = parser.parse_args()
 
     columns, rows, ratio_w, ratio_h, gap_x, gap_y = LAYOUTS[args.layout]
+    if args.panel_aspect_ratio:
+        ratio_w, ratio_h = map(int, args.panel_aspect_ratio.split(":"))
     if len(args.images) != columns * rows:
         parser.error(f"{args.layout} requires exactly {columns * rows} images")
 

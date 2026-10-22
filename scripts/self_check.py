@@ -16,12 +16,16 @@ REQUIRED = (
     "assets/package-presets.json",
     "assets/id-photo-sizes.json",
     "assets/id-photo-composition.json",
+    "assets/id-photo-purpose-profiles.json",
     "assets/wedding-presets.json",
     "assets/personal-branding-presets.json",
     "references/identity-preservation.md",
     "references/artistic-portrait.md",
     "references/family-portrait.md",
     "references/id-photo-composition.md",
+    "references/id-photo-delivery.md",
+    "references/id-photo-official-requirements.md",
+    "references/pet-portrait.md",
     "references/id-photo-size-map.md",
     "references/product-catalog.md",
     "references/quality-control.md",
@@ -36,6 +40,8 @@ REQUIRED = (
     "scripts/build_contact_sheet.py",
     "scripts/create_job.py",
     "scripts/format_image.py",
+    "scripts/check_id_photo.py",
+    "scripts/compose_grid.py",
     "scripts/record_confirmation.py",
     "scripts/validate_delivery.py",
 )
@@ -45,6 +51,24 @@ def main() -> int:
     missing = [item for item in REQUIRED if not (ROOT / item).is_file()]
     if missing:
         print("Missing required files:", ", ".join(missing), file=sys.stderr)
+        return 1
+
+    try:
+        purpose_data = json.loads((ROOT / "assets/id-photo-purpose-profiles.json").read_text())
+        purpose_profiles = purpose_data["profiles"]
+        expected = {"generic_sample", "cn_resident_id", "cn_passport_paper", "cn_exit_entry_online",
+                    "exam_registration", "foreign_visa"}
+        if set(purpose_profiles) != expected:
+            raise ValueError("purpose routes missing or unexpected")
+        for key, profile in purpose_profiles.items():
+            if not isinstance(profile["required_context"], list) or not isinstance(profile["submission_eligible"], bool):
+                raise ValueError(f"invalid purpose fields: {key}")
+        if purpose_profiles["generic_sample"]["submission_eligible"]:
+            raise ValueError("generic samples must not be submission eligible")
+        if not purpose_profiles["cn_passport_paper"]["requires_unmodified_capture"]:
+            raise ValueError("paper-passport edit prohibition is missing")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        print(f"Invalid ID purpose profiles: {exc}", file=sys.stderr)
         return 1
 
     size_map_path = ROOT / "assets/id-photo-sizes.json"
@@ -193,9 +217,9 @@ def main() -> int:
         "close_intimate_action",
     }
     if (
-        grid_constraints.get("panel_aspect_ratio") != "3:4"
+        grid_constraints.get("panel_aspect_ratio") != "2:3"
         or grid_constraints.get("grid_layout") != "3_columns_x_3_rows"
-        or grid_constraints.get("grid_aspect_ratio") != "3:4"
+        or grid_constraints.get("grid_aspect_ratio") != "2:3"
         or grid_constraints.get("forbid_mixed_panel_aspect_ratios_default") is not True
         or grid_constraints.get("forbid_non_uniform_scaling") is not True
         or
@@ -323,9 +347,9 @@ def main() -> int:
     }
     if (
         branding_grid.get("default_panels") != 9
-        or branding_grid.get("panel_aspect_ratio") != "3:4"
+        or branding_grid.get("panel_aspect_ratio") != "2:3"
         or branding_grid.get("grid_layout") != "3_columns_x_3_rows"
-        or branding_grid.get("grid_aspect_ratio") != "3:4"
+        or branding_grid.get("grid_aspect_ratio") != "2:3"
         or branding_grid.get("forbid_mixed_panel_aspect_ratios_default") is not True
         or branding_grid.get("min_direct_camera_panels") != 6
         or branding_grid.get("max_off_camera_panels") != 3
@@ -407,6 +431,13 @@ def main() -> int:
     if set(identity_invariants) != required_identity_invariants:
         print("Personal branding identity invariants are incomplete", file=sys.stderr)
         return 1
+
+    for label, constraints in (("Wedding", grid_constraints), ("Personal branding", branding_grid)):
+        if (constraints.get("generation_method") != "single_image_generation"
+                or constraints.get("images_before_selection") != 1
+                or constraints.get("forbid_pre_generated_standalone_cells") is not True):
+            print(f"{label} must generate one complete preview before standalone production", file=sys.stderr)
+            return 1
     branding_avoid = personal_branding.get("aesthetic_avoid", [])
     if not isinstance(branding_avoid, list) or len(branding_avoid) < 8:
         print("Personal branding aesthetic_avoid must contain at least eight rules", file=sys.stderr)
@@ -420,9 +451,11 @@ def main() -> int:
 
     print(f"OK: Python {sys.version_info.major}.{sys.version_info.minor}, Pillow {pillow_version}")
     print(f"OK: {len(profiles)} ID photo size profiles, {len(aliases)} unique names")
+    print(f"OK: {len(purpose_profiles)} ID purpose routes; submission and synthetic tests are distinct")
     print(f"OK: {len(numeric_rules)} ID photo composition rules")
     print(f"OK: {len(wedding_presets)} wedding presets, one consolidated question round")
     print(f"OK: {len(branding_presets)} personal branding presets, one consolidated question round")
+    print("OK: creative preview presets generate one complete image before selection")
     print(f"OK: {ROOT}")
     return 0
 

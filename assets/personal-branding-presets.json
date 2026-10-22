@@ -58,69 +58,160 @@
     {
       "id": "professional_approachable",
       "name": "专业亲和",
-      "aliases": ["通用形象照", "职业形象照", "专业头像"],
-      "use_cases": ["general_professional_profile", "resume", "company_directory"],
-      "background": ["light_gray_studio", "warm_white_studio", "restrained_real_interior"],
+      "aliases": [
+        "通用形象照",
+        "职业形象照",
+        "专业头像"
+      ],
+      "use_cases": [
+        "general_professional_profile",
+        "resume",
+        "company_directory"
+      ],
+      "background": [
+        "light_gray_studio",
+        "warm_white_studio",
+        "restrained_real_interior"
+      ],
       "lighting": "soft_natural_key_with_clean_catchlights",
       "wardrobe": "fitted_business_casual_or_simple_professional",
       "pose": "open_relaxed_confident",
       "mood": "credible_warm_clear",
-      "avoid": ["id_photo_stiffness", "default_arms_crossed", "sales_template_look"]
+      "avoid": [
+        "id_photo_stiffness",
+        "default_arms_crossed",
+        "sales_template_look"
+      ]
     },
     {
       "id": "corporate_executive",
       "name": "企业管理者",
-      "aliases": ["高管形象照", "管理层形象照", "商务高管"],
-      "use_cases": ["executive_bio", "investor_material", "formal_career_profile"],
-      "background": ["restrained_neutral_studio", "architectural_lines", "credible_modern_office"],
+      "aliases": [
+        "高管形象照",
+        "管理层形象照",
+        "商务高管"
+      ],
+      "use_cases": [
+        "executive_bio",
+        "investor_material",
+        "formal_career_profile"
+      ],
+      "background": [
+        "restrained_neutral_studio",
+        "architectural_lines",
+        "credible_modern_office"
+      ],
       "lighting": "controlled_directional_soft_light",
       "wardrobe": "well_fitted_executive_formalwear_without_uniform_cues",
       "pose": "stable_direct_and_composed",
       "mood": "authoritative_trustworthy_contemporary",
-      "avoid": ["waiter_styling", "security_uniform_feel", "fake_luxury_office", "real_estate_agent_cliche"]
+      "avoid": [
+        "waiter_styling",
+        "security_uniform_feel",
+        "fake_luxury_office",
+        "real_estate_agent_cliche"
+      ]
     },
     {
       "id": "founder_entrepreneur",
       "name": "创业者与创始人",
-      "aliases": ["创始人形象照", "创业者形象照", "商业访谈照"],
-      "use_cases": ["founder_story", "business_interview", "press_profile"],
-      "background": ["modern_studio", "product_or_work_space", "urban_architecture"],
+      "aliases": [
+        "创始人形象照",
+        "创业者形象照",
+        "商业访谈照"
+      ],
+      "use_cases": [
+        "founder_story",
+        "business_interview",
+        "press_profile"
+      ],
+      "background": [
+        "modern_studio",
+        "product_or_work_space",
+        "urban_architecture"
+      ],
       "lighting": "natural_environmental_light_with_subject_priority",
       "wardrobe": "modern_business_casual_or_contemporary_tailoring",
       "pose": "seated_leaning_light_walk_or_environmental_interaction",
       "mood": "energetic_decisive_accessible",
-      "avoid": ["meaningless_laptop", "coffee_prop_cliche", "phone_prop_cliche", "generic_coworking_blur"]
+      "avoid": [
+        "meaningless_laptop",
+        "coffee_prop_cliche",
+        "phone_prop_cliche",
+        "generic_coworking_blur"
+      ]
     },
     {
       "id": "lecturer_expert",
       "name": "讲师与专家",
-      "aliases": ["讲师形象照", "专家形象照", "顾问形象照", "课程封面照"],
-      "use_cases": ["course_cover", "speaker_poster", "consultant_profile", "expert_brand"],
-      "background": ["clean_studio", "credible_speaking_space", "subtle_domain_context"],
+      "aliases": [
+        "讲师形象照",
+        "专家形象照",
+        "顾问形象照",
+        "课程封面照"
+      ],
+      "use_cases": [
+        "course_cover",
+        "speaker_poster",
+        "consultant_profile",
+        "expert_brand"
+      ],
+      "background": [
+        "clean_studio",
+        "credible_speaking_space",
+        "subtle_domain_context"
+      ],
       "lighting": "clear_soft_light_suitable_for_text_overlay",
       "wardrobe": "polished_professional_with_domain_fit",
       "pose": "direct_portrait_or_natural_open_explanation_gesture",
       "mood": "knowledgeable_clear_engaging",
-      "avoid": ["pointing_at_blank_screen", "fake_whiteboard_text", "garbled_book_titles", "exaggerated_stage_gesture"]
+      "avoid": [
+        "pointing_at_blank_screen",
+        "fake_whiteboard_text",
+        "garbled_book_titles",
+        "exaggerated_stage_gesture"
+      ]
     },
     {
       "id": "creator_creative",
       "name": "创作者与创意职业",
-      "aliases": ["自媒体形象照", "个人品牌照", "设计师形象照", "创作者头像"],
-      "use_cases": ["creator_profile", "social_media", "designer_profile", "creative_professional_brand"],
-      "background": ["distinct_color_field", "material_rich_studio", "authentic_creative_workspace"],
+      "aliases": [
+        "自媒体形象照",
+        "个人品牌照",
+        "设计师形象照",
+        "创作者头像"
+      ],
+      "use_cases": [
+        "creator_profile",
+        "social_media",
+        "designer_profile",
+        "creative_professional_brand"
+      ],
+      "background": [
+        "distinct_color_field",
+        "material_rich_studio",
+        "authentic_creative_workspace"
+      ],
       "lighting": "expressive_but_face_legible",
       "wardrobe": "individual_contemporary_and_role_credible",
       "pose": "confident_asymmetric_or_environmental",
       "mood": "distinctive_current_personal",
-      "avoid": ["unrelated_trend_props", "heavy_beauty_filter", "costume_like_styling", "identity_obscuring_effects"]
+      "avoid": [
+        "unrelated_trend_props",
+        "heavy_beauty_filter",
+        "costume_like_styling",
+        "identity_obscuring_effects"
+      ]
     }
   ],
   "concept_grid_constraints": {
+    "generation_method": "single_image_generation",
+    "images_before_selection": 1,
+    "forbid_pre_generated_standalone_cells": true,
     "default_panels": 9,
-    "panel_aspect_ratio": "3:4",
+    "panel_aspect_ratio": "2:3",
     "grid_layout": "3_columns_x_3_rows",
-    "grid_aspect_ratio": "3:4",
+    "grid_aspect_ratio": "2:3",
     "forbid_mixed_panel_aspect_ratios_default": true,
     "min_direct_camera_panels": 6,
     "max_off_camera_panels": 3,
@@ -139,7 +230,10 @@
       "presenting_or_gesturing",
       "lifestyle_activity"
     ],
-    "required_scene_categories": ["professional", "lifestyle"],
+    "required_scene_categories": [
+      "professional",
+      "lifestyle"
+    ],
     "min_distinct_lifestyle_activities": 2,
     "require_varied_wardrobe_or_styling": true,
     "require_varied_wardrobe_silhouettes": true,
@@ -160,15 +254,60 @@
     "default_stage": "single_concept_grid"
   },
   "example_concept_grid_scene_matrix": [
-    {"slot": "formal_standing", "category": "professional", "action": "confident_standing_portrait", "gaze": "to_camera"},
-    {"slot": "seated_or_leaning", "category": "professional", "action": "relaxed_seated_environmental_portrait", "gaze": "to_camera"},
-    {"slot": "environmental_working", "category": "professional", "action": "authentic_work_activity_with_camera_connection", "gaze": "to_camera"},
-    {"slot": "presenting", "category": "professional", "action": "natural_explanation_gesture", "gaze": "to_camera"},
-    {"slot": "close_avatar", "category": "professional", "action": "expressive_head_and_shoulders", "gaze": "to_camera"},
-    {"slot": "negative_space_preview", "category": "professional", "action": "asymmetric_layout_portrait", "gaze": "to_camera"},
-    {"slot": "exercise", "category": "lifestyle", "action": "credible_sport_or_workout_motion", "gaze": "to_camera_or_clear_three_quarter_face"},
-    {"slot": "social_gathering", "category": "lifestyle", "action": "natural_party_or_dinner_social_moment", "gaze": "to_camera_or_clear_three_quarter_face"},
-    {"slot": "travel", "category": "lifestyle", "action": "environmental_travel_exploration", "gaze": "to_camera_or_clear_three_quarter_face"}
+    {
+      "slot": "formal_standing",
+      "category": "professional",
+      "action": "confident_standing_portrait",
+      "gaze": "to_camera"
+    },
+    {
+      "slot": "seated_or_leaning",
+      "category": "professional",
+      "action": "relaxed_seated_environmental_portrait",
+      "gaze": "to_camera"
+    },
+    {
+      "slot": "environmental_working",
+      "category": "professional",
+      "action": "authentic_work_activity_with_camera_connection",
+      "gaze": "to_camera"
+    },
+    {
+      "slot": "presenting",
+      "category": "professional",
+      "action": "natural_explanation_gesture",
+      "gaze": "to_camera"
+    },
+    {
+      "slot": "close_avatar",
+      "category": "professional",
+      "action": "expressive_head_and_shoulders",
+      "gaze": "to_camera"
+    },
+    {
+      "slot": "negative_space_preview",
+      "category": "professional",
+      "action": "asymmetric_layout_portrait",
+      "gaze": "to_camera"
+    },
+    {
+      "slot": "exercise",
+      "category": "lifestyle",
+      "action": "credible_sport_or_workout_motion",
+      "gaze": "to_camera_or_clear_three_quarter_face"
+    },
+    {
+      "slot": "social_gathering",
+      "category": "lifestyle",
+      "action": "natural_party_or_dinner_social_moment",
+      "gaze": "to_camera_or_clear_three_quarter_face"
+    },
+    {
+      "slot": "travel",
+      "category": "lifestyle",
+      "action": "environmental_travel_exploration",
+      "gaze": "to_camera_or_clear_three_quarter_face"
+    }
   ],
   "optional_scene_disambiguation": {
     "mall_or_shopping_center": "recognizable_indoor_retail_space",

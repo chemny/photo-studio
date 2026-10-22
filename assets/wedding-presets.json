@@ -41,7 +41,13 @@
     {
       "id": "urban_light_wedding",
       "name": "都市轻婚礼",
-      "aliases": ["都市", "轻婚礼", "登记照", "街拍", "美术馆"],
+      "aliases": [
+        "都市",
+        "轻婚礼",
+        "登记照",
+        "街拍",
+        "美术馆"
+      ],
       "scene": "registry_museum_or_modern_city_street",
       "background": "bright_contemporary_architecture",
       "lighting": "fresh_daylight_or_playful_direct_flash",
@@ -54,7 +60,13 @@
     {
       "id": "minimal_fashion_editorial",
       "name": "极简时装片",
-      "aliases": ["极简", "时装", "影棚", "雕塑感", "高级婚纱"],
+      "aliases": [
+        "极简",
+        "时装",
+        "影棚",
+        "雕塑感",
+        "高级婚纱"
+      ],
       "scene": "cool_white_studio_with_metal_or_geometric_installation",
       "background": "cool_white_light_gray_and_brushed_metal",
       "lighting": "clean_window_light_or_refined_direct_flash",
@@ -67,7 +79,16 @@
     {
       "id": "outdoor_youth_documentary",
       "name": "户外青春纪实",
-      "aliases": ["海边", "沙滩", "草坪", "林地", "公路", "森系", "户外", "纪实"],
+      "aliases": [
+        "海边",
+        "沙滩",
+        "草坪",
+        "林地",
+        "公路",
+        "森系",
+        "户外",
+        "纪实"
+      ],
       "scene": "sandy_beach_meadow_woodland_road_or_open_nature",
       "background": "wide_bright_natural_environment",
       "lighting": "neutral_fresh_daylight_without_orange_cast",
@@ -80,7 +101,14 @@
     {
       "id": "new_chinese_youth",
       "name": "新中式青年感",
-      "aliases": ["中式", "新中式", "旗袍", "红墙", "国风", "城市夜景"],
+      "aliases": [
+        "中式",
+        "新中式",
+        "旗袍",
+        "红墙",
+        "国风",
+        "城市夜景"
+      ],
       "scene": "contemporary_red_wall_modern_chinese_architecture_or_city_night",
       "background": "restrained_red_ivory_black_with_negative_space",
       "lighting": "clean_daylight_or_modern_direct_flash",
@@ -92,9 +120,12 @@
     }
   ],
   "concept_grid_constraints": {
-    "panel_aspect_ratio": "3:4",
+    "generation_method": "single_image_generation",
+    "images_before_selection": 1,
+    "forbid_pre_generated_standalone_cells": true,
+    "panel_aspect_ratio": "2:3",
     "grid_layout": "3_columns_x_3_rows",
-    "grid_aspect_ratio": "3:4",
+    "grid_aspect_ratio": "2:3",
     "forbid_mixed_panel_aspect_ratios_default": true,
     "forbid_non_uniform_scaling": true,
     "distinct_wardrobe_silhouettes": 5,
@@ -107,8 +138,22 @@
     "max_walking_hand_in_hand_panels": 1,
     "max_repeated_action_panels": 1,
     "max_side_by_side_upright_ratio": 0.45,
-    "required_scene_categories": ["interior", "urban", "nature"],
-    "example_scene_slots": ["garden", "interior", "conservatory", "sandy_beach", "chinese_courtyard", "modern_architecture", "city_night", "woodland_meadow", "minimal_studio"],
+    "required_scene_categories": [
+      "interior",
+      "urban",
+      "nature"
+    ],
+    "example_scene_slots": [
+      "garden",
+      "interior",
+      "conservatory",
+      "sandy_beach",
+      "chinese_courtyard",
+      "modern_architecture",
+      "city_night",
+      "woodland_meadow",
+      "minimal_studio"
+    ],
     "allow_user_requested_scene_substitution": true,
     "require_substitute_scene_distinct_from_other_panels": true,
     "required_pose_families": [

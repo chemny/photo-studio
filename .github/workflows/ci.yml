@@ -39,6 +39,9 @@ jobs:
         shell: bash
         run: python scripts/self_check.py
 
+      - name: Test image export and delivery checks
+        run: python -m unittest discover -s tests -v
+
       - name: Smoke test --help on every script
         shell: bash
         run: |

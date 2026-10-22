@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-10-22",
+  "profiles": {
+    "generic_sample": {
+      "label": "普通尺寸／造型样张",
+      "submission_eligible": false,
+      "required_context": [],
+      "official_sources": []
+    },
+    "cn_resident_id": {
+      "label": "中国居民身份证",
+      "submission_eligible": true,
+      "required_context": ["receiving_authority", "submission_channel"],
+      "official_sources": [
+        "https://www.bjfsh.gov.cn/ztzx/2023/zzxbs/hzda/jmsfz/cjwd/202312/t20231205_40069285.shtml",
+        "https://www.beijing.gov.cn/fuwu/bmfw/bmzt/sfz/rdgz/201809/t20180917_1857547.html",
+        "https://yaoan.gov.cn/info/2873/499464.htm"
+      ],
+      "source_scope": "Beijing appearance guidance and Yaoan on-site capture guidance; verify the receiving locality separately",
+      "styling_checks": ["hair_and_ears", "accessories", "attire", "makeup_and_eyes", "expression"],
+      "appearance_defaults": ["unobstructed eyebrows and ears", "no earrings or necklaces", "dark non-uniform clothing including collar", "no heavy makeup"],
+      "paper_reference_mm": [26, 32],
+      "digital_upload_pixels": null
+    },
+    "cn_passport_paper": {
+      "label": "中国护照／旅行证纸质照",
+      "submission_eligible": true,
+      "required_context": ["receiving_authority", "submission_channel"],
+      "official_sources": ["https://to.china-embassy.gov.cn/chn/lsfw/zjbl/lsqw_133413/202506/t20250612_11646385.htm"],
+      "source_scope": "Chinese embassy in Tonga, paper passport-photo guidance dated 2025-06-12; verify the actual receiving post",
+      "requires_unmodified_capture": true,
+      "paper_reference_mm": [33, 48],
+      "head_width_mm": [15, 22],
+      "head_height_mm": [28, 33],
+      "top_margin_mm": [3, 5],
+      "chin_to_bottom_min_mm": 7,
+      "background": "white",
+      "digital_upload_pixels": null,
+      "appearance_defaults": ["unobstructed eyebrows, eyes and ears", "natural expression", "even lighting"],
+      "studio_recommendations_not_official_mandates": ["no jewelry", "dark modest top", "neutral closed mouth"]
+    },
+    "cn_exit_entry_online": {
+      "label": "中国出入境网办上传照",
+      "submission_eligible": true,
+      "required_context": ["document_type", "receiving_authority", "submission_channel"],
+      "official_sources": ["https://www.nia.gov.cn/n741445/n741619/n894511/c896346/content.html"],
+      "source_scope": "General NIA guide only; the current upload portal must supply its own pixel, byte and processing requirements",
+      "digital_upload_pixels": null,
+      "requires_current_portal_rules": true
+    },
+    "exam_registration": {
+      "label": "考试／报名上传照",
+      "submission_eligible": true,
+      "required_context": ["exam_name", "year_or_session", "region", "submission_channel"],
+      "official_sources": [
+        "https://cyle.neea.cn/xhtml1/report/18051/6315-1.htm",
+        "https://dele.neea.cn/xhtml1/report/19041/7938-1.htm"
+      ],
+      "source_scope": "Examples showing different exam rules, not a shared exam preset; retrieve the current exam/session notice",
+      "digital_upload_pixels": null,
+      "requires_current_portal_rules": true
+    },
+    "foreign_visa": {
+      "label": "外国签证／外国护照",
+      "submission_eligible": true,
+      "required_context": ["country_or_region", "document_type", "receiving_authority", "submission_channel"],
+      "official_sources": [],
+      "source_scope": "No universal visa preset; retrieve the destination government's current rules",
+      "digital_upload_pixels": null,
+      "requires_current_portal_rules": true
+    }
+  }
+}
